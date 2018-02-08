@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    # Keep same as AWS Aurora Postgres
+    image: postgres:9.6.3
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
